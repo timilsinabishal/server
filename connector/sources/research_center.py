@@ -80,6 +80,8 @@ class ResearchResourceCenter(Source):
             date = datetime.datetime.strptime(date, '%Y-%m-%d')
             url = tds[0].find('a').attrs['href']
             data = Lead(
+                # FIXME: use proper key
+                id=url,
                 title=title.strip(),
                 published_on=date.date(),
                 url=url,

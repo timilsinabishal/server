@@ -101,6 +101,8 @@ class PDNA(Source):
                 if url[0] == '/':  # means relative path
                     url = self.website + url
                 data = Lead(
+                    # FIXME: use proper key
+                    id=url,
                     title=title.strip(),
                     url=url,
                     source='PDNA portal',

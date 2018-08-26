@@ -173,6 +173,8 @@ class WorldFoodProgramme(Source):
             title = content.get_text()
             url = content['href']
             data = Lead(
+                # FIXME: use proper key
+                id=url,
                 title=title.strip(),
                 url=url,
                 source='WFP Assessments',

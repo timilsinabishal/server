@@ -75,6 +75,8 @@ class HumanitarianResponse(Source):
             date = datetime.strptime(datestr, '%m/%d/%Y')
             url = tds[4].find('a')['href']
             data = Lead(
+                # FIXME: use proper key
+                id=url,
                 title=title,
                 published_on=date.date(),
                 url=url,
