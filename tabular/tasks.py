@@ -1,6 +1,8 @@
 import traceback
 import logging
 
+from dateparser import parse as dateparse
+
 from celery import shared_task
 from redis_store import redis
 from django.db import transaction
@@ -45,8 +47,8 @@ def auto_detect_and_update_fields(book):
                 type = Field.STRING
                 if parse_number(v):
                     type = Field.NUMBER
-                # elif parse_date(v):
-                #     type = Field.DATE
+                elif parse_datetime(v):
+                    type = Field.DATETIME
                 else:
                     type = Field.STRING
 
@@ -77,6 +79,12 @@ def parse_number(val):
         return True
     except ValueError as ve:
         return False
+
+
+def parse_datetime(val):
+    # try date parsing for english, french and spanish languages only
+    date = dateparse(val, languages=['en', 'fr', 'es'])
+    return date is not None
 
 
 @shared_task
