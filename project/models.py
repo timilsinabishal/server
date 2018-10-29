@@ -176,12 +176,14 @@ class Project(UserResource):
 
     @staticmethod
     def get_for_member(user):
+        # FIXME
         return Project.get_annotated().filter(
             Project.get_query_for_member(user)
         ).distinct()
 
     @staticmethod
     def get_query_for_member(user):
+        # FIXME
         return (
             models.Q(members=user) |
             models.Q(user_groups__members=user)
